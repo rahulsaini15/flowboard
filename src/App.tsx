@@ -13,6 +13,7 @@ import {
   LayoutGrid,
   List,
   LockKeyhole,
+  Pencil,
   Plus,
   Search,
   Settings2,
@@ -271,7 +272,8 @@ function TaskCard({
       className="group cursor-grab rounded-xl border border-ink-100 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-panel active:cursor-grabbing"
     >
       <div className="mb-3 flex items-start justify-between gap-2">
-        <button type="button" onClick={onOpen} className="text-left text-sm font-semibold leading-5 text-ink-900 hover:text-brand-700 focus:outline-none focus:underline">{task.title}</button>
+        <button type="button" aria-label={`Edit task: ${task.title}`} onClick={onOpen} className="text-left text-sm font-semibold leading-5 text-ink-900 hover:text-brand-700 focus:outline-none focus:underline">{task.title}</button>
+        <button type="button" aria-label={`Open task details: ${task.title}`} onClick={onOpen} className="rounded-md p-1.5 text-ink-500 transition hover:bg-brand-50 hover:text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"><Pencil size={14} /></button>
       </div>
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <span className={`rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wide ring-1 ring-inset ${priorityStyle[task.priority]}`}>{task.priority === "none" ? "No priority" : task.priority}</span>

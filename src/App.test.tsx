@@ -31,10 +31,22 @@ describe("Flowboard", () => {
   it("opens task details and closes them with Escape", async () => {
     const user = userEvent.setup();
     render(<App />);
-    await screen.findByText("Tighten sign-in error states");
-    await user.click(screen.getByRole("button", { name: "Tighten sign-in error states" }));
+    await screen.findAllByRole("button", { name: "Edit task: Tighten sign-in error states" });
+    await user.click(screen.getAllByRole("button", { name: "Edit task: Tighten sign-in error states" })[0]);
     expect(screen.getByRole("dialog", { name: "Task details" })).toBeInTheDocument();
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("dialog", { name: "Task details" })).not.toBeInTheDocument();
+  });
+
+  it("edits and saves a task directly from its board card", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await screen.findByText("Tighten sign-in error states");
+    await user.click(screen.getAllByRole("button", { name: "Edit task: Tighten sign-in error states" })[0]);
+    const title = screen.getByRole("textbox", { name: "Task title" });
+    await user.clear(title);
+    await user.type(title, "Updated directly from the board");
+    await user.click(screen.getByRole("button", { name: "Save changes" }));
+    expect(await screen.findByRole("button", { name: "Edit task: Updated directly from the board" })).toBeInTheDocument();
   });
 });
