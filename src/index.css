@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply min-h-full bg-[#f7f8fc] antialiased;
+  }
+
+  body {
+    @apply m-0 min-h-screen font-sans text-ink-900;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    @apply font-sans;
+  }
+}
